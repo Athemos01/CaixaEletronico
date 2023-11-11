@@ -10,26 +10,24 @@ public class CaixaEletronico {
             return false;
         }
     }
-    public static void versaldo(){
-        System.out.println("\nSeu saldo é: "+ saldo);
+    public double getSaldo(){
+        return saldo;
     }
-    public static void retirar(double valor){
+    public static Boolean retirar(double valor){
         if(saldo<valor){
-            System.out.println("\nValor insuficiente!!");
+            return false;
         }else{
             saldo-=valor;
+            return true;
         }
     }
-    public static void depositar(double valor){
-        try{
-            saldo+=valor;
-            System.out.println("\nValor Depositado na conta");
-        }catch (Exception e){
-            System.out.println("\nSaldo Não depositado. Tente novamente!!");
-        }
+    public static Boolean depositar(double valor){
+        saldo+=valor;
+        return true;
     }
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        CaixaEletronico caixa = new CaixaEletronico();
         int opcao;
         double valor;
         int code;
@@ -47,10 +45,10 @@ public class CaixaEletronico {
                     System.out.print("\nDigite a senha: ");
                     code=scan.nextInt();
                     if(validar(code)== true){
-                        versaldo();
+                    System.out.println("Seu Saldo é: "+ caixa.getSaldo());
                     }else{
-                        System.out.println("\nSenha Errada");
-                    }                    
+                    System.out.println("\nSenha Errada");
+                    }                                        
                     break;
                 case 2:
                     System.out.print("\nDigite a senha: ");
@@ -58,7 +56,11 @@ public class CaixaEletronico {
                     if(validar(code)== true){
                         System.out.print("\nDigite a quantia a ser depositada: ");
                         valor= scan.nextDouble();
-                        depositar(valor);
+                        if(depositar(valor)== true){
+                            System.out.println("Deposito concluido");
+                        }else{
+                            System.out.println("Deposito incompleto");
+                        }
                     }else{
                         System.out.println("\nSenha Errada");
                     }                    
@@ -69,7 +71,11 @@ public class CaixaEletronico {
                     if(validar(code)== true){
                         System.out.print("\nDigite a quantida a ser retirada: ");
                         valor= scan.nextDouble();
-                        retirar(valor);
+                        if(retirar(valor)== true){
+                            System.out.println("Saldo Retirado: " + valor);
+                        }else{
+                            System.out.println("Saldo Insuficiente!!");
+                        }
                     }else{
                         System.out.println("\nSenha Errada");
                     }                     
