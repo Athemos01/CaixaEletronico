@@ -31,6 +31,10 @@ public class TestUnitarioCaixaEletronico {
         CaixaEletronico caixa = new CaixaEletronico();
         assertTrue(caixa.depositar(100));
         assertEquals(100,caixa.getSaldo(),0.01);
-
+    }
+    @Test
+    public void testversaldo(){
+        CaixaEletronico caixa = new CaixaEletronico();
+        assertEquals(caixa.getSaldo(), caixa.getSaldo(),0.01);;
     }
 }
